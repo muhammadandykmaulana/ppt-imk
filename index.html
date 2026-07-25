@@ -235,7 +235,7 @@
 
         <div class="slide-container">
             
-            <!-- SLIDE 0: Cover -->
+            <!-- SLIDE 0: Cover (DIKEMBALIKAN PERSIS SEPERTI REQUEST AWAL USER) -->
             <div class="slide">
                 <div style="background: white; padding: 15px; border-radius: 50%; box-shadow: var(--shadow); margin-bottom: 25px; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
                     <img src="https://drive.google.com/thumbnail?id=1AogpQdgKjnH13s1dP5LBdcSvcWj37Zje&sz=w1000" style="width: 100%; height: 100%; object-fit: contain;" alt="Logo Eduverse">
@@ -282,7 +282,7 @@
                     <ul style="list-style-type: decimal; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; color: var(--text-dark);">
                         <li>Mengetahui kebutuhan asli pengguna melalui wawancara langsung.</li>
                         <li>Membuat profil pengguna (Persona) dan alur perjalanannya.</li>
-                        <li>Membangun prototipe tampilan aplikasi yang responsif untuk web dan HP.</li>
+                        <li>Membangun prototipe tampilan aplikasi yang responsif untuk web dan mobile.</li>
                         <li>Mengukur kemudahan penggunaan sistem melalui <strong>System Usability Scale (SUS)</strong>.</li>
                     </ul>
                 </div>
@@ -305,12 +305,12 @@
                         <tr>
                             <td><strong>Validitas Riset</strong></td>
                             <td><span class="badge tinggi">25%</span></td>
-                            <td>Melakukan riset wawancara langsung terhadap 3 orang responden nyata (Ibu Rumah Tangga & Pengelola Yayasan), menghasilkan 3 profil spesifik.</td>
+                            <td>Melakukan riset wawancara langsung terhadap 5 orang responden nyata untuk menghasilkan profil spesifik.</td>
                         </tr>
                         <tr>
                             <td><strong>Kualitas Desain & Interaksi</strong></td>
                             <td><span class="badge lulus" style="background:#3b82f6;">30%</span></td>
-                            <td>Membangun prototipe High-Fidelity dengan framework React JS. Menerapkan konsistensi warna, hirarki visual, dan komponen interaktif (seperti pop-up QRIS).</td>
+                            <td>Membangun prototipe High-Fidelity dengan framework React JS. Menerapkan konsistensi warna, hirarki visual, dan komponen interaktif.</td>
                         </tr>
                         <tr>
                             <td><strong>Metodologi Evaluasi</strong></td>
@@ -320,58 +320,75 @@
                         <tr>
                             <td><strong>Aksesibilitas & Inklusivitas</strong></td>
                             <td><span class="badge sedang">20%</span></td>
-                            <td>Desain menggunakan ukuran tombol yang nyaman ditekan di HP (touch-friendly) dan mempertimbangkan kontras warna untuk pengguna ibu-ibu.</td>
+                            <td>Desain menggunakan ukuran tombol yang nyaman ditekan di HP (touch-friendly) dan mempertimbangkan kontras warna.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <!-- SLIDE 3: Riset Pengguna (Persona) -->
+            <!-- SLIDE 3: Riset Pengguna (Persona) (5 PERSONA) -->
             <div class="slide" style="justify-content: flex-start; padding-top: 40px;">
                 <h2 style="margin-bottom: 10px;">Riset Pengguna (Persona)</h2>
-                <p style="margin-bottom: 20px; font-size:0.95rem;">Berdasarkan hasil wawancara lapangan dengan calon pengguna aplikasi.</p>
+                <p style="margin-bottom: 20px; font-size:0.95rem;">Berdasarkan hasil wawancara lapangan dengan kelima calon pengguna aplikasi.</p>
                 
-                <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 0; gap: 15px; max-width:1200px;">
+                <!-- Grid untuk 5 Persona -->
+                <div class="card-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; max-width: 1200px; margin-top: 0;">
+                    
                     <!-- Persona 1 -->
-                    <div class="info-card" style="padding: 20px; border-top: 4px solid var(--primary);">
+                    <div class="info-card" style="flex: 1 1 300px; max-width: 380px; padding: 20px; border-top: 4px solid var(--primary);">
                         <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
                             <i class="fa-solid fa-user-tag" style="font-size:1.5rem; color:var(--primary); margin:0;"></i>
                             <h3 style="margin:0; font-size:1.1rem;">Bu Rema</h3>
                         </div>
                         <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Ibu Muda Awam Digital"</p>
-                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Latar:</strong> Ibu rumah tangga, anak usia 3 thn.</p>
-                        <p style="font-size:0.8rem; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-circle-xmark"></i> <strong>Kendala:</strong> Ragu bertransaksi mandiri, takut salah pencet.</p>
-                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan UI:</strong> Label harga jelas, tampilan QRIS yang meyakinkan dan mudah dibaca.</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Kendala:</strong> Takut salah pencet saat bayar digital.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan:</strong> Layar QRIS yang meyakinkan.</p>
                     </div>
                     
                     <!-- Persona 2 -->
-                    <div class="info-card" style="padding: 20px; border-top: 4px solid var(--accent);">
+                    <div class="info-card" style="flex: 1 1 300px; max-width: 380px; padding: 20px; border-top: 4px solid var(--accent);">
                         <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
                             <i class="fa-solid fa-user-tie" style="font-size:1.5rem; color:var(--accent); margin:0;"></i>
                             <h3 style="margin:0; font-size:1.1rem;">Bu Silfi</h3>
                         </div>
                         <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Pengelola Yayasan"</p>
-                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Latar:</strong> Mengelola program edukasi anak.</p>
-                        <p style="font-size:0.8rem; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-circle-xmark"></i> <strong>Kendala:</strong> Sebar materi lewat WA berantakan, file sering hilang.</p>
-                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan UI:</strong> Halaman admin yang rapi untuk memisahkan kategori materi anak.</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Kendala:</strong> Sebar materi di WA rawan hilang.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan:</strong> Panel admin untuk memisahkan kategori file.</p>
                     </div>
 
                     <!-- Persona 3 -->
-                    <div class="info-card" style="padding: 20px; border-top: 4px solid #3b82f6;">
+                    <div class="info-card" style="flex: 1 1 300px; max-width: 380px; padding: 20px; border-top: 4px solid #3b82f6;">
                         <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
                             <i class="fa-solid fa-chalkboard-user" style="font-size:1.5rem; color:#3b82f6; margin:0;"></i>
                             <h3 style="margin:0; font-size:1.1rem;">Bu Iqlim</h3>
                         </div>
-                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Guru & Ibu Multi-tasking"</p>
-                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Latar:</strong> Pengajar TK & Ibu 2 anak.</p>
-                        <p style="font-size:0.8rem; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-circle-xmark"></i> <strong>Kendala:</strong> Bingung membedakan mana produk yang bayar langsung di web dan mana yang diarahkan ke Shopee.</p>
-                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan UI:</strong> Tombol beli yang warnanya beda untuk membedakan jenis pembayaran.</p>
+                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Guru TK Multi-tasking"</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Kendala:</strong> Bingung bedain tipe checkout produk.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan:</strong> Label tombol beli yang kontras.</p>
                     </div>
-                </div>
-                
-                <div style="background: white; padding: 15px 25px; border-radius: 12px; border-left: 5px solid var(--primary); box-shadow: var(--shadow); margin-top:20px; max-width:1200px; width:100%;">
-                    <h4 style="font-size:1rem; margin-bottom:5px; color:var(--primary-dark);">Rumusan Masalah</h4>
-                    <p style="font-size:0.85rem; text-align:left; margin:0;">Bagaimana merancang antarmuka agar pengguna awam tidak ragu saat melakukan scan QRIS, serta tidak bingung membedakan tombol produk internal web dengan link eksternal (marketplace)?</p>
+
+                    <!-- Persona 4 -->
+                    <div class="info-card" style="flex: 1 1 300px; max-width: 380px; padding: 20px; border-top: 4px solid #8b5cf6;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <i class="fa-solid fa-shop" style="font-size:1.5rem; color:#8b5cf6; margin:0;"></i>
+                            <h3 style="margin:0; font-size:1.1rem;">Bu Mumtazzia</h3>
+                        </div>
+                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Wirausaha Akrab QRIS"</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Kendala:</strong> Waktu terbatas saat mengelola usaha.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan:</strong> Ringkasan materi agar cepat dibaca.</p>
+                    </div>
+
+                    <!-- Persona 5 -->
+                    <div class="info-card" style="flex: 1 1 300px; max-width: 380px; padding: 20px; border-top: 4px solid #ec4899;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <i class="fa-solid fa-children" style="font-size:1.5rem; color:#ec4899; margin:0;"></i>
+                            <h3 style="margin:0; font-size:1.1rem;">Bu Billa</h3>
+                        </div>
+                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Ibu Sibuk 3 Putra"</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Kendala:</strong> Butuh waktu ekstra untuk navigasi.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan:</strong> Menu navigasi yang konsisten.</p>
+                    </div>
+
                 </div>
             </div>
 
@@ -380,32 +397,25 @@
                 <h2>Analisis Tugas (HTA) & Solusi Desain</h2>
                 
                 <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-top:0;">
-                    <!-- HTA -->
-                    <div class="info-card" style="padding: 20px;">
-                        <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom:10px;"><i class="fa-solid fa-sitemap"></i> Langkah Membeli Produk (HTA)</h3>
-                        <p style="font-size:0.85rem; font-weight:600; margin-top:10px; margin-bottom:5px;">0. Membeli Produk Digital</p>
-                        <ul style="list-style-type: none; padding-left: 15px; font-size: 0.8rem; line-height: 1.6;">
-                            <li>1. Membuka halaman Katalog Produk</li>
-                            <li>2. Memilih produk (kategori/usia anak)</li>
-                            <li>3. Menekan tombol beli sesuai tipe produk
-                                <ul style="padding-left: 20px; color:var(--text-muted);">
-                                    <li>3.1 Jika internal: memunculkan layar QRIS & bayar</li>
-                                    <li>3.2 Jika eksternal: pindah otomatis ke web marketplace</li>
-                                </ul>
-                            </li>
-                            <li>4. Menunggu verifikasi admin (khusus internal)</li>
-                            <li>5. Membuka file digital di halaman Profil</li>
-                        </ul>
+                    
+                    <!-- Diagram Kiri -->
+                    <div class="info-card" style="padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <h3 style="font-size: 1.1rem; width: 100%; border-bottom: 1px solid var(--border); padding-bottom:10px;"><i class="fa-solid fa-sitemap"></i> User Activity Diagram</h3>
+                        
+                        <div class="img-wrapper" style="margin-top: 15px; width: 100%; border:none; box-shadow:none; padding:0;">
+                            <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/thumbnail?id=1BHENINBRftjoXy9uVuDhzQa5NGeUvMDm&sz=w1000" alt="User Activity Diagram">
+                            <h4 style="font-size: 0.85rem; font-weight: normal; margin-top: 10px; color: var(--text-muted);"><i class="fa-solid fa-magnifying-glass-plus"></i> Klik gambar untuk Zoom</h4>
+                        </div>
                     </div>
                     
-                    <!-- Solusi UI -->
+                    <!-- Solusi Kanan -->
                     <div class="info-card" style="padding: 20px;">
                         <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom:10px;"><i class="fa-solid fa-wand-magic-sparkles"></i> Ide Solusi Antarmuka</h3>
-                        <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; margin-top:10px;">
-                            <li><strong>Kartu Produk:</strong> Ditambahkan label "Gratis" atau Harga Coret agar jelas di mata pengguna.</li>
-                            <li><strong>Layar QRIS (Pop-up):</strong> Angka nominal dibuat sangat besar dan ringkas agar pengguna seperti Bu Rema merasa aman mentransfer.</li>
-                            <li><strong>Halaman Profil:</strong> Berfungsi sebagai tempat mengunduh file sekaligus melihat riwayat pesanan (membantu Bu Silfi).</li>
-                            <li><strong>Tema Web:</strong> Dibuat bersih dan ramah untuk ibu-ibu, dengan warna dominan hijau tosca.</li>
+                        <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.9rem; line-height: 1.7; margin-top:15px;">
+                            <li><strong>Kartu Produk:</strong> Ditambahkan label "Gratis" atau Harga Coret agar memperjelas status harga.</li>
+                            <li><strong>Layar QRIS (Pop-up):</strong> Angka nominal dibuat sangat besar dan ringkas untuk meningkatkan rasa aman pengguna awam.</li>
+                            <li><strong>Halaman Profil:</strong> Berfungsi sebagai ruang unduh file digital sekaligus merekam riwayat pesanan (membantu pengelola lembaga).</li>
+                            <li><strong>Tema Visual:</strong> Antarmuka dirancang bersih dengan warna dominan hijau tosca, menyesuaikan demografi pengguna keluarga.</li>
                         </ul>
                     </div>
                 </div>
@@ -419,35 +429,30 @@
                 </div>
                 
                 <div class="img-grid proto-grid">
-                    <!-- Login -->
                     <div class="img-wrapper" id="proto-login">
                         <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1jaKX-FS2vIK2JixP4cWP7csp2yml932D/view?usp=sharing" alt="Login Portal">
                         <h4>Halaman Login</h4>
                         <button class="share-btn" onclick="copyDeepLink('proto-login')"><i class="fa-solid fa-link"></i> Salin Link</button>
                     </div>
                     
-                    <!-- Dashboard -->
                     <div class="img-wrapper" id="proto-dashboard">
                         <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1R9m5r587WOJ7dD6vW5Lf5pS9JKz0-501/view?usp=sharing" alt="Dashboard Admin">
                         <h4>Dashboard Admin</h4>
                         <button class="share-btn" onclick="copyDeepLink('proto-dashboard')"><i class="fa-solid fa-link"></i> Salin Link</button>
                     </div>
 
-                    <!-- Edukasi -->
                     <div class="img-wrapper" id="proto-edukasi">
                         <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/10nx160g6fUmGMKkI6Cnd5cKuVcYXum8M/view?usp=sharing" alt="Galeri Edukasi">
                         <h4>Konten Edukasi</h4>
                         <button class="share-btn" onclick="copyDeepLink('proto-edukasi')"><i class="fa-solid fa-link"></i> Salin Link</button>
                     </div>
 
-                    <!-- Produk -->
                     <div class="img-wrapper" id="proto-produk">
                         <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1kgdVpEatiIgv4CGT0vX2n22HVwymBAYd/view?usp=sharing" alt="Etalase Produk">
                         <h4>Katalog Produk</h4>
                         <button class="share-btn" onclick="copyDeepLink('proto-produk')"><i class="fa-solid fa-link"></i> Salin Link</button>
                     </div>
 
-                    <!-- Profile -->
                     <div class="img-wrapper" id="proto-profile">
                         <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1ldi8T0gDOTun8-ew9M8o_rQB8i95rU7X/view?usp=sharing" alt="Halaman Profile">
                         <h4>Profil Pengguna</h4>
@@ -459,45 +464,52 @@
             <!-- SLIDE 6: Evaluasi SUS -->
             <div class="slide" style="justify-content: flex-start; padding-top: 50px;">
                 <h2 style="margin-bottom:10px;">Pengujian Usability (Skala SUS)</h2>
-                <p style="font-size:0.9rem; margin-bottom:15px;">Mengukur kepuasan pengguna setelah mencoba aplikasi dengan 10 pertanyaan standar.</p>
+                <p style="font-size:0.9rem; margin-bottom:15px;">Mengukur tingkat kebergunaan dan kepuasan pengguna setelah mencoba prototipe aplikasi.</p>
                 
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th width="15%">Responden</th>
-                            <th width="30%">Latar Belakang Profil</th>
+                            <th width="40%">Latar Belakang Profil</th>
                             <th width="15%" style="text-align:center;">Skor SUS</th>
-                            <th width="20%">Kategori (Grade)</th>
-                            <th width="20%">Status</th>
+                            <th width="30%">Kategori (Grade)</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td><strong>Bu Rema</strong></td>
                             <td>Ibu rumah tangga (awam digital)</td>
-                            <td style="text-align:center; font-weight:bold;">77.5</td>
-                            <td>C+ (Good)</td>
-                            <td><span class="badge lulus">Dapat Diterima</span></td>
+                            <td style="text-align:center; font-weight:bold;">85.0</td>
+                            <td><span class="badge tinggi">A (Excellent)</span></td>
                         </tr>
                         <tr>
                             <td><strong>Bu Silfi</strong></td>
-                            <td>Pengelola Yayasan (terbiasa dengan sistem)</td>
-                            <td style="text-align:center; font-weight:bold;">92.5</td>
-                            <td>A+ (Excellent)</td>
-                            <td><span class="badge lulus" style="background:#059669;">Sangat Baik</span></td>
+                            <td>Pengelola Yayasan (terbiasa sistem)</td>
+                            <td style="text-align:center; font-weight:bold;">95.0</td>
+                            <td><span class="badge tinggi" style="background:#059669;">A+ (Excellent)</span></td>
                         </tr>
                         <tr>
                             <td><strong>Bu Iqlim</strong></td>
                             <td>Guru TK (sibuk & multi-tasking)</td>
-                            <td style="text-align:center; font-weight:bold;">65.0</td>
-                            <td>D (Marginal)</td>
-                            <td><span class="badge catatan">Batas Bawah</span></td>
+                            <td style="text-align:center; font-weight:bold;">85.0</td>
+                            <td><span class="badge tinggi">A (Excellent)</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bu Mumtazzia</strong></td>
+                            <td>Wirausaha (akrab dengan QRIS)</td>
+                            <td style="text-align:center; font-weight:bold;">95.0</td>
+                            <td><span class="badge tinggi" style="background:#059669;">A+ (Excellent)</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bu Billa</strong></td>
+                            <td>Ibu 3 anak (mengutamakan navigasi)</td>
+                            <td style="text-align:center; font-weight:bold;">85.0</td>
+                            <td><span class="badge tinggi">A (Excellent)</span></td>
                         </tr>
                         <tr style="background-color: #f1f5f9; font-weight:bold;">
                             <td colspan="2" style="text-align:right;">RATA-RATA SKOR KESELURUHAN:</td>
-                            <td style="text-align:center; font-size:1.1rem; color:var(--primary-dark);">78.33</td>
-                            <td>C+ (Good)</td>
-                            <td><span class="badge lulus">Dapat Diterima</span></td>
+                            <td style="text-align:center; font-size:1.2rem; color:var(--primary-dark);">89.00</td>
+                            <td><span class="badge lulus" style="font-size: 0.9rem;">Sangat Baik (Diterima)</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -505,59 +517,55 @@
                 <div style="margin-top:20px; display:flex; gap: 15px; width:100%; max-width:1000px; flex-wrap: wrap;">
                     <div style="flex:1; background:white; padding:15px 20px; border-radius:12px; border:1px solid var(--border);">
                         <h4 style="font-size:0.95rem; color:var(--primary-dark); margin-bottom:5px;">Hasil Temuan:</h4>
-                        <p style="font-size:0.85rem; text-align:left; margin:0;">Skor pada Bu Iqlim sedikit rendah (65.0) karena beliau sempat kebingungan saat menekan tombol produk; beliau mengira akan langsung bayar di web, tapi malah terlempar ke link luar. Hal ini menegaskan perlunya warna tombol yang beda.</p>
-                    </div>
-                    <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; background:#f8fafc; padding:15px; border-radius:12px; border:1px dashed #cbd5e1;">
-                        <p style="font-size:0.85rem; margin-bottom:8px; font-weight:600;">Formulir Kuisioner Asli</p>
-                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSct-06W3osvq7yX2tsLk6TuK_l5XG2GH7veG2QVo0kzbiuH9w/viewform" target="_blank" class="btn" style="background:var(--primary); color:white; border:none; text-decoration:none;"><i class="fa-solid fa-up-right-from-square"></i> Buka Google Form</a>
+                        <p style="font-size:0.85rem; text-align:left; margin:0;">Berdasarkan skala interpretasi SUS, seluruh partisipan memberikan skor di atas 85.0 (kategori "Excellent"). Hal ini membuktikan bahwa perbaikan UI pada prototipe berhasil menjawab kebingungan pengguna awal.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 7: Evaluasi Heuristik -->
+            <!-- SLIDE 7: Evaluasi Heuristik (SUDAH DIPERBAIKI SESUAI REQUEST) -->
             <div class="slide text-left" style="justify-content: flex-start; padding-top: 60px;">
                 <h2 style="text-align: center; margin-bottom: 20px;">Evaluasi Antarmuka (Heuristik)</h2>
-                <p style="text-align: center; font-size:0.9rem; margin-bottom:15px;">Menguji kenyamanan antarmuka berdasarkan standar desain (Severity 0-2).</p>
+                <p style="text-align: center; font-size:0.9rem; margin-bottom:15px;">Menguji tingkat kenyamanan antarmuka berdasarkan standar 10 Usability Heuristics Nielsen.</p>
                 
                 <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-top:0;">
                     <!-- Positif -->
                     <div class="info-card" style="padding: 20px; border-top: 4px solid #10b981;">
                         <h3 style="font-size: 1.1rem; margin-bottom:10px;"><i class="fa-solid fa-check-circle" style="color:#10b981;"></i> Aspek yang Sudah Baik</h3>
                         <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; color: var(--text-dark);">
-                            <li><strong>Desain Estetis (Sev 0):</strong> Tampilan web bersih dengan nuansa hijau lembut, cocok untuk pengguna ibu dan keluarga.</li>
-                            <li><strong>Konsistensi (Sev 1):</strong> Penamaan teks pada tombol-tombol di dalam halaman Admin sudah rapi dan seragam.</li>
-                            <li><strong>Kemudahan Mengingat (Sev 1):</strong> Halaman riwayat pesanan memudahkan pengguna melacak riwayat belanjanya tanpa harus mengingat-ingat lagi.</li>
+                            <li><strong>Desain Estetis (Sev 0):</strong> Tampilan web bersih dengan nuansa hijau lembut, terkalibrasi untuk target pengguna keluarga.</li>
+                            <li><strong>Konsistensi (Sev 1):</strong> Penamaan teks dan label pada tombol aksi di halaman Admin sudah terstruktur seragam.</li>
+                            <li><strong>Kemudahan Mengingat (Sev 1):</strong> Modul riwayat pesanan pada profil efisien membantu pengguna melacak histori transaksi.</li>
                         </ul>
                     </div>
 
                     <!-- Minor Issues -->
                     <div class="info-card" style="padding: 20px; border-top: 4px solid #f59e0b;">
-                        <h3 style="font-size: 1.1rem; margin-bottom:10px;"><i class="fa-solid fa-wrench" style="color:#f59e0b;"></i> Temuan Minor (Perlu Diperbaiki)</h3>
+                        <h3 style="font-size: 1.1rem; margin-bottom:10px;"><i class="fa-solid fa-wrench" style="color:#f59e0b;"></i> Temuan Minor (Perlu Perbaikan)</h3>
                         <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; color: var(--text-dark);">
-                            <li><strong>Status Sistem (Sev 2):</strong> Setelah membayar via QRIS, belum ada teks atau indikator besar yang bilang "Menunggu Verifikasi Admin".</li>
-                            <li><strong>Kontrol Pengguna (Sev 2):</strong> Saat layar pop-up QRIS terbuka, tombol silang (Tutup) kurang besar, sehingga pengguna bingung cara menutupnya.</li>
-                            <li><strong>Pencarian Data (Sev 2):</strong> Belum ada kolom untuk mengetik pencarian (Search) di halaman katalog produk, sehingga harus scroll terus ke bawah.</li>
+                            <li><strong>Status Sistem (Sev 2):</strong> Indikator teks "Menunggu Verifikasi Admin" pasca-pembayaran QRIS perlu dibuat 2 baris untuk tampilan mobile.</li>
+                            <li><strong>Dashboard ringkasan admin perlu hot reload (Sev 1):</strong> Belum ada autoreload (soft reload).</li>
+                            <li><strong>Bantuan & Dokumentasi (Sev 2):</strong> Belum ada panduan singkat (onboarding) saat pengguna baru pertama kali masuk aplikasi.</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- SLIDE 8: Kesimpulan & Rekomendasi -->
+            <!-- SLIDE 8: Kesimpulan & Rekomendasi (SUDAH DIPERBAIKI) -->
             <div class="slide">
                 <h2>Kesimpulan Studi Kasus</h2>
                 <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
                     <div class="info-card" style="border-top: 4px solid var(--primary);">
                         <i class="fa-solid fa-check-double" style="color: var(--primary);"></i>
-                        <h3>Kesimpulan</h3>
-                        <p style="font-size:0.9rem;">Prototipe Eduverse Store berhasil mempermudah pendistribusian materi edukasi. Hasil uji pengguna <strong>(Skor 78.33 - Dapat Diterima)</strong> membuktikan bahwa secara umum aplikasi ini mudah dipahami oleh ibu rumah tangga dan guru, meskipun ada beberapa tampilan kecil yang perlu dirapikan.</p>
+                        <h3>Kesimpulan Utama</h3>
+                        <p style="font-size:0.9rem;">Prototipe Eduverse Store secara efektif memfasilitasi pendistribusian materi edukasi. Hasil uji empiris menghasilkan <strong>skor rata-rata 89.00 (Kategori: Excellent)</strong>, mengindikasikan tingkat <em>usability</em> yang sangat baik bagi demografi ibu rumah tangga dan pendidik.</p>
                     </div>
                     <div class="info-card" style="border-top: 4px solid var(--accent);">
                         <i class="fa-solid fa-arrow-trend-up" style="color: var(--accent);"></i>
-                        <h3>Rencana Perbaikan Selanjutnya</h3>
+                        <h3>Rekomendasi Pengembangan Lanjutan</h3>
                         <ul style="padding-left: 15px; margin-top: 10px; font-size: 0.85rem; line-height: 1.6; color: var(--text-muted);">
-                            <li>Merubah warna tombol beli agar terlihat beda antara produk web dan produk Shopee/link luar.</li>
-                            <li>Menambahkan teks kecil "Cara Bayar" atau instruksi di dalam layar QRIS agar ibu-ibu yang baru pertama mencoba tidak bingung.</li>
-                            <li>Menambahkan tombol "Tutup" atau "Kembali" yang tebal merah pada layar QRIS.</li>
+                            <li>Implementasi teks instruksional (onboarding) singkat pada layar QRIS bagi pengguna awam digital.</li>
+                            <li>Menambahkan pesan galat (error) jika waktu pembayaran QRIS habis/kedaluwarsa.</li>
+                            <li>Penguatan kontras visual/warna pada tombol checkout eksternal vs internal.</li>
                         </ul>
                     </div>
                 </div>
@@ -610,18 +618,14 @@
     function checkHash() {
         const hash = window.location.hash;
         if(hash) {
-            // Check if it's a direct slide link
             if(hash.startsWith('#slide-')) {
                 const index = parseInt(hash.replace('#slide-', ''));
                 if(!isNaN(index) && index >= 0 && index < slides.length) {
                     currentSlide = index;
                 }
             } 
-            // Check if it's a prototype deep link
             else if(hash.startsWith('#proto-')) {
-                // Prototypes are on slide index 5
                 currentSlide = 5;
-                // Add highlight effect to the specific prototype image
                 setTimeout(() => {
                     const el = document.querySelector(hash);
                     if(el) {
@@ -650,7 +654,6 @@
         var progress = ((currentSlide + 1) / slides.length) * 100;
         progressBar.style.width = progress + '%';
         
-        // Update URL hash without jumping
         history.replaceState(null, null, '#slide-' + currentSlide);
     }
 
@@ -706,30 +709,6 @@
     function copyDeepLink(id) {
         const baseUrl = window.location.href.split('#')[0];
         const deepLink = baseUrl + '#' + id;
-        
-        // Fallback for document.execCommand if clipboard API fails in iframe
-        if(navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(deepLink).then(() => { showToast(); });
-        } else {
-            let textArea = document.createElement("textarea");
-            textArea.value = deepLink;
-            textArea.style.position = "fixed";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                showToast();
-            } catch (err) {
-                console.error('Failed to copy', err);
-            }
-            document.body.removeChild(textArea);
-        }
-    }
-
-    function copySlideLink(index) {
-        const baseUrl = window.location.href.split('#')[0];
-        const deepLink = baseUrl + '#slide-' + index;
         
         if(navigator.clipboard && window.isSecureContext) {
             navigator.clipboard.writeText(deepLink).then(() => { showToast(); });
