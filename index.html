@@ -131,6 +131,7 @@
         h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent); border-radius: 2px; }
         p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; text-align: center;}
         .text-left p { text-align: left; margin: 0; }
+        a { text-decoration: none; }
 
         .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; margin-top: 20px; }
         .info-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 16px; text-align: left; transition: 0.3s; box-shadow: var(--shadow); display: flex; flex-direction: column;}
@@ -505,9 +506,15 @@
                     </tbody>
                 </table>
                 
-                <div style="margin-top:20px; background:white; padding:15px 25px; border-radius:12px; border:1px solid var(--border); width:100%; max-width:1000px;">
-                    <h4 style="font-size:0.95rem; color:var(--primary-dark); margin-bottom:5px;">Insight Kualitatif:</h4>
-                    <p style="font-size:0.85rem; text-align:left; margin:0;">Skor marginal pada Bu Iqlim (65.0) mengkonfirmasi hipotesis awal bahwa ketiadaan ikon/warna pembeda yang sangat kontras antara checkout internal (QRIS) dan eksternal menyebabkan kebingungan kognitif saat bertransaksi.</p>
+                <div style="margin-top:20px; display:flex; gap: 15px; width:100%; max-width:1000px; flex-wrap: wrap;">
+                    <div style="flex:1; background:white; padding:15px 20px; border-radius:12px; border:1px solid var(--border);">
+                        <h4 style="font-size:0.95rem; color:var(--primary-dark); margin-bottom:5px;">Insight Kualitatif:</h4>
+                        <p style="font-size:0.85rem; text-align:left; margin:0;">Skor marginal pada Bu Iqlim (65.0) mengkonfirmasi ketiadaan ikon/warna pembeda yang sangat kontras antara checkout internal (QRIS) dan eksternal menyebabkan kebingungan kognitif saat bertransaksi.</p>
+                    </div>
+                    <div style="display:flex; flex-direction:column; justify-content:center; align-items:center; background:#f8fafc; padding:15px; border-radius:12px; border:1px dashed #cbd5e1;">
+                        <p style="font-size:0.85rem; margin-bottom:8px; font-weight:600;">Lihat Kuesioner Asli</p>
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSct-06W3osvq7yX2tsLk6TuK_l5XG2GH7veG2QVo0kzbiuH9w/viewform" target="_blank" class="btn" style="background:var(--primary); color:white; border:none; text-decoration:none;"><i class="fa-solid fa-up-right-from-square"></i> Buka Google Form SUS</a>
+                    </div>
                 </div>
             </div>
 
