@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentasi - Eduverse Store (IMK)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Tema Eduverse Store: Lembut, Hijau Tosca, Krem, Warm Orange */
+            --bg-main: #fdfbf7;
+            --bg-card: #ffffff;
+            --primary: #059669; /* Emerald 600 */
+            --primary-dark: #064e3b; /* Emerald 900 untuk Sidebar */
+            --accent: #fb923c; /* Orange 400 */
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --sidebar-w: 280px;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* --- LAYOUT WRAPPER --- */
+        .layout-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .sidebar {
+            width: var(--sidebar-w);
+            background: var(--primary-dark);
+            border-right: 1px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: margin-left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            flex-shrink: 0;
+            color: white;
+            box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .layout-wrapper.sidebar-collapsed .sidebar {
+            margin-left: calc(var(--sidebar-w) * -1);
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+        }
+        .sidebar-header div h2 { font-size: 1.2rem; color: #fff; margin:0; }
+        .sidebar-header div h2::after { display: none; }
+        .sidebar-header div p { font-size: 0.8rem; color: #a7f3d0; margin-top: 5px; }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 15px 0;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .sidebar-nav li {
+            padding: 12px 20px;
+            color: #d1fae5;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            border-left: 4px solid transparent;
+            font-weight: 500;
+        }
+        .sidebar-nav li:hover { background: rgba(255,255,255,0.1); color: white; }
+        .sidebar-nav li.active {
+            background: rgba(255,255,255,0.15);
+            color: #fcd34d;
+            border-left-color: #fcd34d;
+            font-weight: 700;
+        }
+
+        .main-content {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(5, 150, 105, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(251, 146, 60, 0.05) 0%, transparent 20%);
+        }
+
+        .slide-container {
+            width: 100%; height: 100%;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .slide {
+            position: absolute; inset: 0;
+            opacity: 0; transform: scale(0.95) translateY(30px); filter: blur(10px);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 40px 60px; pointer-events: none;
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1; transform: scale(1) translateY(0); filter: blur(0);
+            pointer-events: all;
+        }
+
+        h1 { font-size: 3rem; font-weight: 800; margin-bottom: 20px; color: var(--primary-dark); text-align: center;}
+        h2 { font-size: 2rem; font-weight: 700; margin-bottom: 30px; color: var(--primary); position: relative; display: inline-block; text-align: center;}
+        h2::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 60px; height: 4px; background: var(--accent); border-radius: 2px; }
+        p { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 900px; text-align: center;}
+        .text-left p { text-align: left; margin: 0; }
+
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; margin-top: 20px; }
+        .info-card { background: var(--bg-card); border: 1px solid var(--border); padding: 30px; border-radius: 16px; text-align: left; transition: 0.3s; box-shadow: var(--shadow); display: flex; flex-direction: column;}
+        .info-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 25px rgba(5, 150, 105, 0.1); }
+        .info-card i { font-size: 2.2rem; color: var(--accent); margin-bottom: 15px; }
+        .info-card h3 { font-size: 1.2rem; margin-bottom: 12px; color: var(--primary-dark); font-weight: 700;}
+        .info-card p { font-size: 0.95rem; margin: 0; text-align: left; color: var(--text-muted);}
+
+        /* --- TABLES --- */
+        .data-table { width: 100%; max-width: 1000px; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); margin-top:20px; font-size: 0.9rem;}
+        .data-table th { background: var(--primary); color: white; text-align: left; padding: 15px; font-weight: 600;}
+        .data-table td { padding: 12px 15px; border-bottom: 1px solid var(--border); color: var(--text-dark); vertical-align: middle;}
+        .data-table tr:hover { background: #f8fafc; }
+        
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; color: white;}
+        .badge.tinggi { background: #10b981; } /* Green */
+        .badge.sedang { background: #f59e0b; } /* Orange */
+        .badge.rendah { background: #ef4444; } /* Red */
+        .badge.lulus { background: var(--primary); }
+        .badge.catatan { background: var(--accent); }
+
+        .img-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; max-width: 1000px; margin-top: 20px; }
+        .img-grid.proto-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; max-width: 1200px;}
+        .img-wrapper { 
+            background: white; padding: 15px; border-radius: 12px; border: 1px solid var(--border); 
+            box-shadow: var(--shadow); transition: 0.3s; display: flex; flex-direction: column;
+        }
+        .img-wrapper:hover { border-color: var(--primary); transform: scale(1.02); }
+        .img-clickable { cursor: zoom-in; width: 100%; height: 220px; object-fit: cover; border-radius: 8px; border: 1px solid #f1f5f9; background: #f8fafc;}
+        .proto-grid .img-clickable { height: 180px; object-position: top; }
+        .img-wrapper h4 { font-size: 1rem; color: var(--primary-dark); margin: 15px 0 5px 0; text-align: center;}
+        
+        .share-btn { 
+            margin-top: auto; width: 100%; padding: 8px; background: #f1f5f9; color: var(--primary-dark);
+            border: 1px dashed #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 600;
+            transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 5px;
+        }
+        .share-btn:hover { background: var(--primary); color: white; border-color: var(--primary);}
+
+        .top-bar { position: absolute; top: 20px; right: 20px; z-index: 100; display: flex; gap: 10px; }
+        .btn { background: white; border: 1px solid var(--border); color: var(--text-dark); padding: 8px 15px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-size: 0.9rem; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow); font-weight: 600;}
+        .btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .toggle-btn { position: absolute; top: 20px; left: 20px; z-index: 100; }
+        .nav-controls { position: absolute; bottom: 30px; right: 30px; display: flex; gap: 15px; z-index: 100; }
+        .nav-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--primary); color: white; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(5,150,105,0.3);}
+        .nav-btn:hover { background: var(--accent); transform: scale(1.1); }
+        .progress-bar { position: absolute; bottom: 0; left: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); transition: width 0.5s; z-index: 100; }
+
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 2000; justify-content: center; align-items: center; cursor: zoom-out; opacity: 0; transition: opacity 0.3s; flex-direction: column; }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox img { max-width: 90%; max-height: 85%; object-fit: contain; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); background:white;}
+        
+        .toast { position: fixed; bottom: -50px; left: 50%; transform: translateX(-50%); background: var(--text-dark); color: white; padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; transition: 0.3s; z-index: 9999;}
+        .toast.show { bottom: 20px; }
+
+        @media (max-width: 768px) { 
+            .layout-wrapper.sidebar-collapsed .sidebar { margin-left: -100%; } 
+            .sidebar { position: absolute; height: 100%; }
+            .slide { padding: 80px 20px 80px 20px; justify-content: flex-start; }
+            h1 { font-size: 2rem; }
+            .nav-controls { bottom: 15px; right: 15px; }
+            .img-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="layout-wrapper sidebar-collapsed" id="layoutWrapper">
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div>
+                <h2>Eduverse Store</h2>
+                <p>Tugas Proyek UAS IMK</p>
+            </div>
+            <button class="btn" style="padding: 6px 10px; background:transparent; border-color:rgba(255,255,255,0.2); color:white; box-shadow:none;" onclick="toggleSidebar()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <ul class="sidebar-nav" id="sidebarNav">
+            <li onclick="goToSlide(0)"><i class="fa-solid fa-house"></i> Cover</li>
+            <li onclick="goToSlide(1)"><i class="fa-solid fa-bullseye"></i> Latar Belakang Studi</li>
+            <li onclick="goToSlide(2)"><i class="fa-solid fa-scale-balanced"></i> Kriteria Penilaian UAS</li>
+            <li onclick="goToSlide(3)"><i class="fa-solid fa-users-viewfinder"></i> Riset Pengguna (Persona)</li>
+            <li onclick="goToSlide(4)"><i class="fa-solid fa-sitemap"></i> Task Analysis (HTA)</li>
+            <li onclick="goToSlide(5)"><i class="fa-solid fa-mobile-screen"></i> Tampilan Prototype</li>
+            <li onclick="goToSlide(6)"><i class="fa-solid fa-chart-pie"></i> Evaluasi Usability (SUS)</li>
+            <li onclick="goToSlide(7)"><i class="fa-solid fa-universal-access"></i> Aksesibilitas & Heuristik</li>
+            <li onclick="goToSlide(8)"><i class="fa-solid fa-flag-checkered"></i> Kesimpulan</li>
+        </ul>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <button class="btn toggle-btn" onclick="toggleSidebar()" title="Menu">
+            <i class="fa-solid fa-bars"></i> Menu
+        </button>
+
+        <div class="top-bar">
+            <button class="btn" id="fsBtn" onclick="toggleFullScreen()"><i class="fa-solid fa-expand"></i></button>
+        </div>
+        
+        <div class="progress-bar" id="progressBar"></div>
+
+        <div class="slide-container">
+            
+            <!-- SLIDE 0: Cover -->
+            <div class="slide">
+                <div style="background: white; padding: 15px; border-radius: 50%; box-shadow: var(--shadow); margin-bottom: 25px; width: 140px; height: 140px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <img src="https://drive.google.com/thumbnail?id=1AogpQdgKjnH13s1dP5LBdcSvcWj37Zje&sz=w1000" style="width: 100%; height: 100%; object-fit: contain;" alt="Logo Eduverse">
+                </div>
+                <h1>Eduverse Store</h1>
+                <h3 style="color: var(--accent); margin-bottom: 10px; font-size: 1.4rem; font-weight: 600; text-align: center;">Design Case Study: Platform Edukasi Parenting Islami</h3>
+                <p style="font-size: 1rem; margin-bottom: 25px;">Evaluasi Usability & Perancangan Interaksi Manusia-Komputer</p>
+                
+                <div style="margin-top: 10px; padding: 25px 40px; background: white; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); width: 100%; max-width: 650px;">
+                    <p style="text-align: left; font-size: 0.9rem; margin-bottom: 8px;"><strong>Disusun Oleh (Merangkap 3 Peran):</strong></p>
+                    <ul style="list-style: none; font-size: 1.1rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 15px;">
+                        <li><i class="fa-solid fa-user-graduate" style="color: var(--primary); margin-right: 10px; font-size:0.9rem;"></i> Muhammad Andyk Maulana <span style="font-weight:400; font-size:0.9rem; color:var(--text-muted);">(TI - 1002240004)</span></li>
+                    </ul>
+                    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 15px;">
+                        <span class="badge" style="background:#475569;"><i class="fa-solid fa-magnifying-glass"></i> UX Researcher</span>
+                        <span class="badge" style="background:#475569;"><i class="fa-solid fa-pen-nib"></i> UI/Visual Designer</span>
+                        <span class="badge" style="background:#475569;"><i class="fa-solid fa-bars-progress"></i> Interaction Designer / PM</span>
+                    </div>
+                    <hr style="margin: 15px 0; border-top: 1px dashed var(--border);">
+                    <p style="text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted);">INSTITUT TEKNOLOGI TANGERANG SELATAN (ITTS) - 2026</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 1: Latar Belakang & Tujuan -->
+            <div class="slide" style="justify-content: flex-start; padding-top: 50px;">
+                <h2 style="margin-bottom: 15px;">Latar Belakang (Empathize)</h2>
+                
+                <div class="card-grid" style="margin-top: 0; margin-bottom: 15px; grid-template-columns: 1fr 1fr;">
+                    <div class="info-card" style="padding: 20px;">
+                        <i class="fa-solid fa-circle-exclamation" style="font-size: 1.8rem; margin-bottom: 10px;"></i>
+                        <h3 style="font-size: 1.1rem;">Masalah Usability Saat Ini</h3>
+                        <p style="font-size: 0.85rem; line-height: 1.5;">Komunitas parenting Islami sering berbagi materi via grup WA atau Medsos. Dari sudut pandang IMK, ini menimbulkan <strong>hambatan kognitif</strong>: pencarian konten tidak terstruktur, transaksi manual tanpa feedback sistem, dan sulitnya melacak riwayat pembelian produk digital.</p>
+                    </div>
+                    <div class="info-card" style="padding: 20px;">
+                        <i class="fa-solid fa-lightbulb" style="color: #f59e0b; font-size: 1.8rem; margin-bottom: 10px;"></i>
+                        <h3 style="font-size: 1.1rem;">Solusi: Eduverse Store</h3>
+                        <p style="font-size: 0.85rem; line-height: 1.5;">Aplikasi web berbasis React JS yang memecahkan masalah kebergunaan melalui antarmuka terpusat untuk edukasi, checkout mandiri terintegrasi (QRIS), dan pelacakan riwayat akses materi secara terstruktur.</p>
+                    </div>
+                </div>
+
+                <div class="info-card" style="width: 100%; max-width: 1100px; padding: 20px;">
+                    <h3 style="font-size: 1.1rem; color: var(--primary); margin-bottom: 10px; border-bottom: 1px dashed var(--border); padding-bottom: 8px;"><i class="fa-solid fa-bullseye"></i> Tujuan Studi Kasus (IMK)</h3>
+                    <ul style="list-style-type: decimal; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; color: var(--text-dark);">
+                        <li>Menggali kebutuhan riil pengguna melalui wawancara dan observasi.</li>
+                        <li>Merumuskan persona dan memetakan hambatan kognitif pengguna (User Journey).</li>
+                        <li>Membangun prototipe high-fidelity yang responsif dan memperhatikan aspek aksesibilitas.</li>
+                        <li>Mengukur tingkat kebergunaan secara kuantitatif melalui <strong>System Usability Scale (SUS)</strong> dan kualitatif via Evaluasi Heuristik.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SLIDE 2: Bobot Penilaian UAS -->
+            <div class="slide" style="justify-content: flex-start; padding-top: 60px;">
+                <h2>Pemenuhan Kriteria Penilaian UAS</h2>
+                <p style="margin-bottom: 15px; font-size:0.95rem;">Proyek ini dikembangkan selaras dengan panduan penilaian akhir mata kuliah IMK.</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th width="20%">Kriteria Penilaian</th>
+                            <th width="10%">Bobot</th>
+                            <th width="70%">Implementasi dalam Proyek Ini</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Validitas Riset</strong></td>
+                            <td><span class="badge tinggi">25%</span></td>
+                            <td>Melakukan riset primer (wawancara riil) terhadap 3 responden target (Ibu Rumah Tangga & Pengelola Yayasan), menghasilkan 3 User Persona spesifik, dan memetakan User Journey.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Kualitas Desain & Interaksi</strong></td>
+                            <td><span class="badge lulus" style="background:#3b82f6;">30%</span></td>
+                            <td>Membangun prototipe High-Fidelity dengan framework React JS. Menerapkan konsistensi warna (Emerald/Orange), hirarki visual, dan respon interaktif (hover, modal QRIS).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metodologi Evaluasi</strong></td>
+                            <td><span class="badge tinggi">25%</span></td>
+                            <td>Melakukan pengujian <em>System Usability Scale (SUS)</em> via Google Form kepada partisipan nyata dan melakukan Audit Heuristik (Nielsen's 10 Heuristics) secara mandiri.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aksesibilitas & Inklusivitas</strong></td>
+                            <td><span class="badge sedang">20%</span></td>
+                            <td>Mengadopsi ukuran target ketuk yang ramah mobile (mobile-first), menyediakan palet warna dengan kontras memadai, dan mempertimbangkan pengguna lansia/awam digital.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SLIDE 3: Riset Pengguna (Persona) -->
+            <div class="slide" style="justify-content: flex-start; padding-top: 40px;">
+                <h2 style="margin-bottom: 10px;">Define: User Personas</h2>
+                <p style="margin-bottom: 20px; font-size:0.95rem;">Berdasarkan wawancara lapangan (memenuhi kriteria Validitas Riset 25%).</p>
+                
+                <div class="card-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 0; gap: 15px; max-width:1200px;">
+                    <!-- Persona 1 -->
+                    <div class="info-card" style="padding: 20px; border-top: 4px solid var(--primary);">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <i class="fa-solid fa-user-tag" style="font-size:1.5rem; color:var(--primary); margin:0;"></i>
+                            <h3 style="margin:0; font-size:1.1rem;">Bu Rema</h3>
+                        </div>
+                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Ibu Muda yang Mencari Kepastian"</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Latar:</strong> Ibu rumah tangga, anak usia 3 thn.</p>
+                        <p style="font-size:0.8rem; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-circle-xmark"></i> <strong>Frustrasi:</strong> Ragu bertransaksi digital mandiri, takut salah tekan.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan UI:</strong> Badge harga jelas, modal QRIS yang meyakinkan & membimbing.</p>
+                    </div>
+                    
+                    <!-- Persona 2 -->
+                    <div class="info-card" style="padding: 20px; border-top: 4px solid var(--accent);">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <i class="fa-solid fa-user-tie" style="font-size:1.5rem; color:var(--accent); margin:0;"></i>
+                            <h3 style="margin:0; font-size:1.1rem;">Bu Silfi</h3>
+                        </div>
+                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Pengelola Yayasan yang Ingin Mandiri"</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Latar:</strong> Pengelola Yayasan Zait bin Tsabit.</p>
+                        <p style="font-size:0.8rem; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-circle-xmark"></i> <strong>Frustrasi:</strong> Distribusi via WhatsApp berantakan, file materi sering hilang.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan UI:</strong> Panel Admin terstruktur, kategori konten jelas, rekap pesanan.</p>
+                    </div>
+
+                    <!-- Persona 3 -->
+                    <div class="info-card" style="padding: 20px; border-top: 4px solid #3b82f6;">
+                        <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
+                            <i class="fa-solid fa-chalkboard-user" style="font-size:1.5rem; color:#3b82f6; margin:0;"></i>
+                            <h3 style="margin:0; font-size:1.1rem;">Bu Iqlim</h3>
+                        </div>
+                        <p style="font-weight:700; font-size:0.85rem; color:var(--text-dark); margin-bottom:5px;">"Pendidik Dua Rentang Usia"</p>
+                        <p style="font-size:0.8rem; margin-bottom:10px;"><strong>Latar:</strong> Pengajar TK & Ibu 2 anak beda usia.</p>
+                        <p style="font-size:0.8rem; color:#ef4444; margin-bottom:5px;"><i class="fa-solid fa-circle-xmark"></i> <strong>Frustrasi:</strong> Bingung bedakan alur checkout web internal vs marketplace luar.</p>
+                        <p style="font-size:0.8rem; color:var(--primary);"><i class="fa-solid fa-circle-check"></i> <strong>Kebutuhan UI:</strong> Label penanda tipe checkout yang kontras, filter berdasarkan usia.</p>
+                    </div>
+                </div>
+                
+                <div style="background: white; padding: 15px 25px; border-radius: 12px; border-left: 5px solid var(--primary); box-shadow: var(--shadow); margin-top:20px; max-width:1200px; width:100%;">
+                    <h4 style="font-size:1rem; margin-bottom:5px; color:var(--primary-dark);">Problem Statement (How Might We)</h4>
+                    <p style="font-size:0.85rem; text-align:left; margin:0;">Bagaimana caranya agar pengguna baru (ibu rumah tangga) merasa yakin saat melakukan checkout QRIS mandiri, dan dapat membedakan dengan jelas antara produk internal dan eksternal sebelum menekan tombol?</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 4: HTA & Ideasi Solusi -->
+            <div class="slide" style="justify-content: flex-start; padding-top: 50px;">
+                <h2>Ideate: Task Analysis (HTA) & Solusi</h2>
+                
+                <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-top:0;">
+                    <!-- HTA -->
+                    <div class="info-card" style="padding: 20px;">
+                        <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom:10px;"><i class="fa-solid fa-sitemap"></i> Hierarchical Task Analysis</h3>
+                        <p style="font-size:0.85rem; font-weight:600; margin-top:10px; margin-bottom:5px;">0. Membeli Produk Digital</p>
+                        <ul style="list-style-type: none; padding-left: 15px; font-size: 0.8rem; line-height: 1.6;">
+                            <li>1. Membuka halaman Katalog Produk</li>
+                            <li>2. Memilih produk (kategori/usia anak)</li>
+                            <li>3. Menekan tombol beli sesuai tipe produk
+                                <ul style="padding-left: 20px; color:var(--text-muted);">
+                                    <li>3.1 Jika internal: memindai QRIS & bayar</li>
+                                    <li>3.2 Jika eksternal: ikuti link marketplace</li>
+                                </ul>
+                            </li>
+                            <li>4. Menunggu verifikasi admin (khusus internal)</li>
+                            <li>5. Membuka akses digital di halaman Profil</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Solusi UI -->
+                    <div class="info-card" style="padding: 20px;">
+                        <h3 style="font-size: 1.1rem; border-bottom: 1px solid var(--border); padding-bottom:10px;"><i class="fa-solid fa-wand-magic-sparkles"></i> Ide Solusi Antarmuka</h3>
+                        <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.85rem; line-height: 1.6; margin-top:10px;">
+                            <li><strong>Kartu Produk:</strong> Menampilkan badge status, harga coret, dan label/ikon tipe checkout secara visual agar meminimalisir error.</li>
+                            <li><strong>Modal QRIS:</strong> Didesain dengan nominal tertera besar dan instruksi ringkas mengurangi keraguan persona Bu Rema.</li>
+                            <li><strong>Halaman Profil:</strong> Berfungsi ganda sebagai tempat mengunduh file dan melihat riwayat (solusi untuk Bu Silfi & Bu Iqlim).</li>
+                            <li><strong>Tema Visual:</strong> Adaptif (Mode Terang/Gelap) menggunakan CSS variables.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div style="margin-top:15px; text-align:center;">
+                     <p style="font-size:0.85rem;">Diagram Alur Checkout lengkap dapat dilihat di Laporan Akhir Studi Kasus.</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 5: Tampilan Prototype -->
+            <div class="slide" id="slide-prototypes" style="justify-content: flex-start; padding-top: 60px;">
+                <h2>Prototipe High-Fidelity</h2>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; align-items: center; margin-bottom: 20px;">
+                    <p style="margin: 0; text-align: left; font-size:0.9rem;">Memenuhi kriteria Kualitas Desain & Interaksi (Bobot 30%). Klik gambar untuk memperbesar.</p>
+                </div>
+                
+                <div class="img-grid proto-grid">
+                    <!-- Login -->
+                    <div class="img-wrapper" id="proto-login">
+                        <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1jaKX-FS2vIK2JixP4cWP7csp2yml932D/view?usp=sharing" alt="Login Portal">
+                        <h4>Login Portal</h4>
+                        <button class="share-btn" onclick="copyDeepLink('proto-login')"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    </div>
+                    
+                    <!-- Dashboard -->
+                    <div class="img-wrapper" id="proto-dashboard">
+                        <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1R9m5r587WOJ7dD6vW5Lf5pS9JKz0-501/view?usp=sharing" alt="Dashboard Admin">
+                        <h4>Dashboard Admin</h4>
+                        <button class="share-btn" onclick="copyDeepLink('proto-dashboard')"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    </div>
+
+                    <!-- Edukasi -->
+                    <div class="img-wrapper" id="proto-edukasi">
+                        <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/10nx160g6fUmGMKkI6Cnd5cKuVcYXum8M/view?usp=sharing" alt="Galeri Edukasi">
+                        <h4>Galeri Edukasi</h4>
+                        <button class="share-btn" onclick="copyDeepLink('proto-edukasi')"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    </div>
+
+                    <!-- Produk -->
+                    <div class="img-wrapper" id="proto-produk">
+                        <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1kgdVpEatiIgv4CGT0vX2n22HVwymBAYd/view?usp=sharing" alt="Etalase Produk">
+                        <h4>Katalog Produk</h4>
+                        <button class="share-btn" onclick="copyDeepLink('proto-produk')"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    </div>
+
+                    <!-- Profile -->
+                    <div class="img-wrapper" id="proto-profile">
+                        <img class="img-clickable" onclick="openLightbox(this.src)" src="https://drive.google.com/file/d/1ldi8T0gDOTun8-ew9M8o_rQB8i95rU7X/view?usp=sharing" alt="Halaman Profile">
+                        <h4>Halaman Profile</h4>
+                        <button class="share-btn" onclick="copyDeepLink('proto-profile')"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: Evaluasi SUS -->
+            <div class="slide" style="justify-content: flex-start; padding-top: 50px;">
+                <h2 style="margin-bottom:10px;">Evaluate: System Usability Scale (SUS)</h2>
+                <p style="font-size:0.9rem; margin-bottom:15px;">Mengukur tingkat kebergunaan secara kuantitatif (Memenuhi kriteria Metodologi Evaluasi 25%).</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th width="15%">Responden</th>
+                            <th width="30%">Latar Belakang Profil</th>
+                            <th width="15%" style="text-align:center;">Skor SUS</th>
+                            <th width="20%">Grade (Adjective)</th>
+                            <th width="20%">Status Acceptability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bu Rema</strong></td>
+                            <td>Ibu rumah tangga (awam digital)</td>
+                            <td style="text-align:center; font-weight:bold;">77.5</td>
+                            <td>C+ (Good)</td>
+                            <td><span class="badge lulus">Acceptable</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bu Silfi</strong></td>
+                            <td>Pengelola Yayasan (terbiasa sistem)</td>
+                            <td style="text-align:center; font-weight:bold;">92.5</td>
+                            <td>A+ (Excellent)</td>
+                            <td><span class="badge tinggi">Acceptable</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bu Iqlim</strong></td>
+                            <td>Pengajar TK (multi-tasking)</td>
+                            <td style="text-align:center; font-weight:bold;">65.0</td>
+                            <td>D (OK / Marginal)</td>
+                            <td><span class="badge catatan">Marginal</span></td>
+                        </tr>
+                        <tr style="background-color: #f1f5f9; font-weight:bold;">
+                            <td colspan="2" style="text-align:right;">RATA-RATA SKOR KESELURUHAN:</td>
+                            <td style="text-align:center; font-size:1.1rem; color:var(--primary-dark);">78.33</td>
+                            <td>C+ / B- (Good)</td>
+                            <td><span class="badge lulus">Acceptable</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top:20px; background:white; padding:15px 25px; border-radius:12px; border:1px solid var(--border); width:100%; max-width:1000px;">
+                    <h4 style="font-size:0.95rem; color:var(--primary-dark); margin-bottom:5px;">Insight Kualitatif:</h4>
+                    <p style="font-size:0.85rem; text-align:left; margin:0;">Skor marginal pada Bu Iqlim (65.0) mengkonfirmasi hipotesis awal bahwa ketiadaan ikon/warna pembeda yang sangat kontras antara checkout internal (QRIS) dan eksternal menyebabkan kebingungan kognitif saat bertransaksi.</p>
+                </div>
+            </div>
+
+            <!-- SLIDE 7: Aksesibilitas & Heuristik -->
+            <div class="slide text-left" style="justify-content: flex-start; padding-top: 60px;">
+                <h2 style="text-align: center; margin-bottom: 20px;">Aksesibilitas & Evaluasi Heuristik</h2>
+                
+                <div class="card-grid" style="grid-template-columns: 1fr 1fr; margin-top:0;">
+                    <!-- Aksesibilitas -->
+                    <div class="info-card" style="padding: 20px; border-top: 4px solid #8b5cf6;">
+                        <h3 style="font-size: 1.1rem; margin-bottom:10px;"><i class="fa-solid fa-universal-access"></i> Tinjauan Aksesibilitas (WCAG)</h3>
+                        <p style="font-size:0.85rem; margin-bottom:8px; font-weight:600;">Memenuhi Kriteria Penilaian UAS 20%</p>
+                        <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.8rem; line-height: 1.6; color: var(--text-dark);">
+                            <li><strong>Kontras Warna:</strong> Palet utama hijau (Emerald) cukup kontras. Perlu perbaikan minor pada teks sekunder abu-abu.</li>
+                            <li><strong>Target Ketuk (Mobile):</strong> Tombol utama (checkout, login) berukuran besar dan aman untuk jari (Touch-friendly). Ikon tabel admin masih agak rapat.</li>
+                            <li><strong>Ramah Awam:</strong> Didukung antarmuka minimalis, namun perlu tambahan tooltip/microcopy panduan di modal QRIS.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Heuristik -->
+                    <div class="info-card" style="padding: 20px; border-top: 4px solid #ef4444;">
+                        <h3 style="font-size: 1.1rem; margin-bottom:10px;"><i class="fa-solid fa-triangle-exclamation"></i> Temuan Heuristik (Severity > 2)</h3>
+                        <p style="font-size:0.85rem; margin-bottom:8px; font-weight:600;">Evaluasi Mandiri (Nielsen's 10 Heuristics)</p>
+                        <ul style="list-style-type: disc; padding-left: 20px; font-size: 0.8rem; line-height: 1.6; color: var(--text-dark);">
+                            <li><strong>Pencegahan Kesalahan (Sev 3):</strong> Risiko salah tekan antara produk internal vs eksternal akibat label kurang mencolok.</li>
+                            <li><strong>Status Sistem (Sev 2):</strong> Tidak ada indikator "Menunggu Verifikasi" yang eksplisit di halaman profil setelah scan QRIS.</li>
+                            <li><strong>Kontrol Pengguna (Sev 2):</strong> Ketiadaan tombol "Batal/Tutup" yang sangat menonjol saat Modal QRIS sudah terbuka.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 8: Kesimpulan & Rekomendasi -->
+            <div class="slide">
+                <h2>Kesimpulan Studi Kasus</h2>
+                <div class="card-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="info-card" style="border-top: 4px solid var(--primary);">
+                        <i class="fa-solid fa-check-double" style="color: var(--primary);"></i>
+                        <h3>Kesimpulan</h3>
+                        <p style="font-size:0.9rem;">Prototipe Eduverse Store berhasil memecahkan masalah kebergunaan terkait distribusi materi edukasi. Hasil uji SUS <strong>(78.33 - Acceptable)</strong> membuktikan antarmuka dapat diterima dengan baik oleh target pengguna (ibu rumah tangga & pendidik), meskipun memerlukan beberapa penyesuaian kognitif.</p>
+                    </div>
+                    <div class="info-card" style="border-top: 4px solid var(--accent);">
+                        <i class="fa-solid fa-arrow-trend-up" style="color: var(--accent);"></i>
+                        <h3>Rekomendasi Iterasi UI Selanjutnya</h3>
+                        <ul style="padding-left: 15px; margin-top: 10px; font-size: 0.85rem; line-height: 1.6; color: var(--text-muted);">
+                            <li>Mengubah warna/ikon tombol checkout untuk membedakan secara tegas produk internal vs eksternal.</li>
+                            <li>Menambahkan microcopy / tooltip panduan singkat ("Cara Bayar") di dalam Modal QRIS.</li>
+                            <li>Memperbesar target ketuk (padding) pada tabel dashboard admin untuk aksesibilitas mobile.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tombol Navigasi -->
+        <div class="nav-controls">
+            <button class="nav-btn" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="nav-btn" onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- LIGHTBOX (ZOOM) -->
+<div class="lightbox" id="imgLightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Zoomed">
+    <div style="margin-top: 15px; color: white; font-size: 0.9rem; background:rgba(0,0,0,0.5); padding: 5px 15px; border-radius:20px;">(Klik dimana saja untuk menutup)</div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div id="toast" class="toast">Link berhasil disalin!</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const navItems = document.querySelectorAll('.sidebar-nav li');
+    const progressBar = document.getElementById('progressBar');
+    const fsBtn = document.getElementById('fsBtn');
+    const layoutWrapper = document.getElementById('layoutWrapper');
+    const toast = document.getElementById('toast');
+
+    const convertGDriveLink = (url) => {
+        if (!url) return '';
+        if (url.includes('drive.google.com/thumbnail')) return url; 
+        const matchId = url.match(/\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+        if (matchId && matchId[1]) return `https://drive.google.com/thumbnail?id=${matchId[1]}&sz=w1000`;
+        return url; 
+    };
+
+    // Auto-convert Google Drive links in image tags on load
+    document.querySelectorAll('img').forEach(img => {
+        if (img.src && img.src.includes('drive.google.com')) {
+            img.src = convertGDriveLink(img.src);
+        }
+    });
+
+    // Handle Hash/Deep Linking on Load
+    function checkHash() {
+        const hash = window.location.hash;
+        if(hash) {
+            // Check if it's a direct slide link
+            if(hash.startsWith('#slide-')) {
+                const index = parseInt(hash.replace('#slide-', ''));
+                if(!isNaN(index) && index >= 0 && index < slides.length) {
+                    currentSlide = index;
+                }
+            } 
+            // Check if it's a prototype deep link
+            else if(hash.startsWith('#proto-')) {
+                // Prototypes are on slide index 5
+                currentSlide = 5;
+                // Add highlight effect to the specific prototype image
+                setTimeout(() => {
+                    const el = document.querySelector(hash);
+                    if(el) {
+                        el.style.borderColor = '#fb923c';
+                        el.style.boxShadow = '0 0 0 4px rgba(251, 146, 60, 0.3)';
+                        setTimeout(() => {
+                            el.style.borderColor = '';
+                            el.style.boxShadow = '';
+                        }, 2000);
+                    }
+                }, 500);
+            }
+        }
+    }
+
+    function updateSlide() {
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            if (index === currentSlide) slide.classList.add('active');
+        });
+        navItems.forEach((li, index) => {
+            li.classList.remove('active');
+            if (index === currentSlide) li.classList.add('active');
+        });
+        
+        var progress = ((currentSlide + 1) / slides.length) * 100;
+        progressBar.style.width = progress + '%';
+        
+        // Update URL hash without jumping
+        history.replaceState(null, null, '#slide-' + currentSlide);
+    }
+
+    function goToSlide(index) {
+        currentSlide = index;
+        updateSlide();
+        if(window.innerWidth <= 768) {
+            layoutWrapper.classList.add('sidebar-collapsed');
+        }
+    }
+
+    function nextSlide() { if (currentSlide < slides.length - 1) { currentSlide++; updateSlide(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateSlide(); } }
+
+    function toggleSidebar() {
+        layoutWrapper.classList.toggle('sidebar-collapsed');
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+        if (e.key === 'ArrowLeft') prevSlide();
+        if (e.key === 'Escape') closeLightbox();
+    });
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(function(err) {
+                console.log('Error fullscreen: ' + err.message);
+            });
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen();
+        }
+    }
+
+    document.addEventListener('fullscreenchange', function() {
+        if (document.fullscreenElement) {
+            fsBtn.innerHTML = '<i class="fa-solid fa-compress"></i>';
+        } else {
+            fsBtn.innerHTML = '<i class="fa-solid fa-expand"></i>';
+        }
+    });
+
+    function openLightbox(src) {
+        document.getElementById('lightboxImg').src = convertGDriveLink(src);
+        document.getElementById('imgLightbox').classList.add('active');
+    }
+
+    function closeLightbox() {
+        document.getElementById('imgLightbox').classList.remove('active');
+    }
+
+    // Share/Deep Link Functionality
+    function copyDeepLink(id) {
+        const baseUrl = window.location.href.split('#')[0];
+        const deepLink = baseUrl + '#' + id;
+        
+        // Fallback for document.execCommand if clipboard API fails in iframe
+        if(navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(deepLink).then(() => { showToast(); });
+        } else {
+            let textArea = document.createElement("textarea");
+            textArea.value = deepLink;
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    }
+
+    function copySlideLink(index) {
+        const baseUrl = window.location.href.split('#')[0];
+        const deepLink = baseUrl + '#slide-' + index;
+        
+        if(navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(deepLink).then(() => { showToast(); });
+        } else {
+            let textArea = document.createElement("textarea");
+            textArea.value = deepLink;
+            textArea.style.position = "fixed";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast();
+            } catch (err) {
+                console.error('Failed to copy', err);
+            }
+            document.body.removeChild(textArea);
+        }
+    }
+
+    function showToast() {
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+
+    // Init
+    checkHash();
+    updateSlide();
+</script>
+</body>
+</html>
